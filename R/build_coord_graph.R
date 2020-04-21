@@ -97,8 +97,8 @@ build_coord_graph <- function(ct_shares.df, coordinated_shares, percentile_edge_
   cat("\nDetecting entities type...")
 
   highly_connected_coordinated_entities <- highly_connected_coordinated_entities %>%
-    mutate(account.url_expanded = ifelse(grepl("groups", name), name, longurl::expand_urls(name, warn = F, agent = "cooRnet-r-package", .progress = TRUE)$expanded_url),
-           entity_type = ifelse(grepl("groups", account.url_expanded), "group", "page")) %>%
+    mutate(account.url_expanded = ifelse(grepl("/groups/", name), name, longurl::expand_urls(name, warn = F, agent = "cooRnet-r-package", .progress = TRUE)$expanded_url),
+           entity_type = ifelse(grepl("/groups/", account.url_expanded), "group", "page")) %>%
     select(-account.url_expanded)
 
   # copy type into graph
